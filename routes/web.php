@@ -12,7 +12,7 @@ use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
-use App\Http\Controllers\HomeController as DashboardController;
+use App\Http\Controllers\HomeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -35,10 +35,7 @@ Route::post('register', [AuthController::class, 'postRegister'])->name('postRegi
 Route::post('logout', [AuthController::class, 'logout'])->name('logout');
 
 
-
-
-
-Route::get('/', [DashboardController::class, 'index'])->name('home');
+Route::get('/', [HomeController::class, 'index'])->name('home');
 
 Route::middleware(['auth:web', 'user_company'])->as('dashboard.')->group(function () {
     Route::prefix('dashboard')->group(function () {
@@ -58,7 +55,6 @@ Route::middleware(['auth:web', 'user_company'])->as('dashboard.')->group(functio
         Route::get('rapports/{from}/{to}', [RapportController::class, 'index'])->name('SearchRapports');
     });
 });
-
 
 
 Route::post('git-deploy', function () {
