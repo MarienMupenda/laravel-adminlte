@@ -10,7 +10,7 @@ use App\Http\Controllers\Api\v1\Pos\SellingController as SellingControllerPos;
 use App\Http\Controllers\Api\v1\SellingController;
 use App\Http\Controllers\Api\v1\UnitController;
 use App\Http\Controllers\Api\v1\UserController;
-use App\Http\Resources\v1\ItemResource;
+use App\Http\Resources\ItemResource;
 use App\Models\Article;
 use App\Models\Item;
 use Carbon\Carbon;

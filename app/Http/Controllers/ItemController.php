@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Helpers\Helpers;
 use App\Http\Controllers\Controller;
-use App\Http\Resources\v1\ItemResource;
+use App\Http\Resources\ItemResource;
 use App\Models\Category;
 use App\Models\Color;
 use App\Models\Item;

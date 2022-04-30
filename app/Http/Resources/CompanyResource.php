@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Resources\v1;
+namespace App\Http\Resources;
 
 use Illuminate\Contracts\Support\Arrayable;
 use Illuminate\Http\Request;

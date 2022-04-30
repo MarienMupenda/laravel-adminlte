@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Resources\pos;
+namespace App\Http\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
 
@@ -9,15 +9,18 @@ class SellingDetailsResource extends JsonResource
     /**
      * Transform the resource into an array.
      *
-     * @param \Illuminate\Http\Request $request
+     * @param  \Illuminate\Http\Request  $request
      * @return array|\Illuminate\Contracts\Support\Arrayable|\JsonSerializable
      */
     public function toArray($request)
     {
         return [
-            'name' => $this->item->name ?? "Item",
-            'qty' => $this->qty,
-            'selling_price' => $this->selling_price,
+            'id'=>$this->id,
+            'item_id'=>$this->item_id,
+            'item_name'=>$this->item->name,
+            'image'=>$this->item->image_small(),
+            'qty'=>$this->qty,
+            'price'=>$this->selling_price,
         ];
     }
 }
