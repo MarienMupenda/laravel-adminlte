@@ -17,20 +17,7 @@ class RouteServiceProvider extends ServiceProvider
      *
      * @var string
      */
-    public const HOME = '/dashboard';
-
-
-    /**
-     * The controller namespace for the application.
-     *
-     * When present, controller route declarations will automatically be prefixed with this namespace.
-     *
-     * @var string|null
-     */
-    // protected $namespace = 'App\\Http\\Controllers';
-
-    /** @var string $apiNamespace */
-    protected $apiNamespace = 'App\Http\Controllers\Api';
+    public const HOME = '/home';
 
     /**
      * Define your route model bindings, pattern filters, etc.
@@ -39,72 +26,17 @@ class RouteServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        // $this->configureRateLimiting();
+        $this->configureRateLimiting();
 
-        // $this->routes(function(){
-        //     Route::middleware('web')
-        //         ->namespace($this->namespace)
-        //         ->group(base_path('routes/web.php'));
+        $this->routes(function () {
+            Route::middleware('api')
+                ->prefix('api')
+                ->group(base_path('routes/api.php'));
 
-        // Route::prefix('api')
-        //     ->middleware('api')
-        //     ->namespace($this->namespace)
-        //     ->group(base_path('routes/api.php'));
-
-
-        // });
-
-        parent::boot();
+            Route::middleware('web')
+                ->group(base_path('routes/web.php'));
+        });
     }
-
-    /**
-     * Define the routes for the application.
-     *
-     * @return void
-     */
-    public function map()
-    {
-        $this->mapApiRoutes();
-
-        $this->mapWebRoutes();
-
-        //
-    }
-
-    /**
-     * Define the "web" routes for the application.
-     *
-     * These routes all receive session state, CSRF protection, etc.
-     *
-     * @return void
-     */
-    protected function mapWebRoutes()
-    {
-        Route::middleware('web')
-            ->namespace($this->namespace)
-            ->group(base_path('routes/web.php'));
-    }
-
-    /**
-     * Define the "API" routes for the application.
-     *
-     * These routes are typically stateless.
-     *
-     * @return void
-     */
-    protected function mapApiRoutes()
-    {
-        Route::prefix('api')
-            ->middleware(['api', 'api_version'])
-            ->namespace($this->namespace)
-            ->group(base_path('routes/api.php'));
-
-        Route::prefix('api/v1')
-            ->middleware(['api', 'api_version'])
-            ->namespace($this->namespace)
-            ->group(base_path('routes/api_v1.php'));
-    }
-
 
     /**
      * Configure the rate limiters for the application.
@@ -114,7 +46,7 @@ class RouteServiceProvider extends ServiceProvider
     protected function configureRateLimiting()
     {
         RateLimiter::for('api', function (Request $request) {
-            return Limit::perMinute(60)->by(optional($request->user())->id ?: $request->ip());
+            return Limit::perMinute(60)->by($request->user()?->id ?: $request->ip());
         });
     }
 }
