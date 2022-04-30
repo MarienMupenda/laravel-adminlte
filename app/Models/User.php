@@ -58,7 +58,7 @@ class User extends Authenticatable
 
     public function hasActiveCompany()
     {
-        return $this->company()->where('state', 'active')->exists();
+        return $this->company()->where('status', 'active')->exists();
     }
 
     public function company()

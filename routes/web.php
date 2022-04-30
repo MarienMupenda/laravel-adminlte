@@ -28,11 +28,11 @@ use Illuminate\Support\Facades\Route;
 
 
 Auth::routes();
+Route::get('/', [HomeController::class, 'index'])->name('home');
 
 Route::middleware(['auth:web', 'user_company'])->group(function () {
 
     Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-    Route::get('/', [HomeController::class, 'index'])->name('home');
 
     Route::resource('products', ProductController ::class);
     Route::resource('books', BookController ::class);
