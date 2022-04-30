@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="author" content="Marien Mupeda">
+    <meta name="author" content="Marien Mupenda">
 
     <title>@yield('code') @yield('title')</title>
 
