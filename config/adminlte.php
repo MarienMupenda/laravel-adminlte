@@ -193,7 +193,7 @@ return [
     'logout_url' => 'logout',
     'login_url' => 'login',
     'register_url' => 'register',
-    'password_reset_url' => 'forgot-password',
+    'password_reset_url' => 'password/reset',
     'password_email_url' => 'password/email',
     'profile_url' => false,
 
