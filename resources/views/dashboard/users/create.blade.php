@@ -9,7 +9,7 @@
                             <strong>{{$title}}</strong>
                         </div>
                         <div class="card-body card-block">
-                            <form action="{{route("dashboard.users.store")}}" enctype="multipart/form-data" method="POST"
+                            <form action="{{route("users.store")}}" enctype="multipart/form-data" method="POST"
                                   class="form-horizontal">
                                 @csrf @method('POST')
 

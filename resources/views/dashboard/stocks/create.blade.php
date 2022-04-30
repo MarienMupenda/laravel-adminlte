@@ -1,4 +1,4 @@
-@extends('dashboard.layout')
+@extends('layout')
 
 @section('content')
     @if(auth()->user()->isAdmin())
@@ -7,7 +7,7 @@
                 <strong>{{$title}}</strong>
             </div>
             <div class="card-body card-block">
-                <form action="{{route("dashboard.stocks.store")}}" method="POST" class="form-horizontal">
+                <form action="{{route("stocks.store")}}" method="POST" class="form-horizontal">
                     @csrf @method('POST')
                     <div class="row form-group">
                         <div class="col col-md-3">
@@ -53,10 +53,9 @@
                     </div>
 
 
-
                     <div class="card-footer">
 
-                        <a href="{{route("dashboard.stocks.index")}}" class="btn btn-outline-primary btn-sm">
+                        <a href="{{route("stocks.index")}}" class="btn btn-outline-primary btn-sm">
                             <i class="fa fa-chevron-left"></i> {{__('Back')}}
                         </a>
                         <button type="submit" class="btn btn-primary btn-sm">
@@ -83,7 +82,7 @@
             $.get("{{url('/api/item')}}/" + value, function (data, status) {
 
                 $("#price").val(data.initial_price);
-                $("#stock1").text(data.stock_qty+" "+data.u);
+                $("#stock1").text(data.stock_qty + " " + data.u);
             });
         }
 

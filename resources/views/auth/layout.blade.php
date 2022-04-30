@@ -23,7 +23,7 @@
 
     @endguest
 
-    @include('dashboard.includes.css_top')
+    @include('includes.css_top')
     @include('analytics')
 </head>
 
@@ -45,12 +45,12 @@
         <!-- MAIN CONTENT-->
             <div class="main-content">
                 <div class="section__content section__content--p30">
-                    <!-- ALERT
+                <!-- ALERT
                     @include('errors.messages')
-                        -->
+                    -->
                     <div class="container-fluid">
                         @yield('content')
-                        @include('dashboard.partials.footer')
+                        @include('partials.footer')
                     </div>
                     <!-- END ALERT-->
                 </div>
@@ -62,7 +62,7 @@
 </div>
 @yield('scripts')
 
-@include('dashboard.includes.js_bottom')
+@include('includes.js_bottom')
 
 </body>
 

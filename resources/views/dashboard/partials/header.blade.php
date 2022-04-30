@@ -2,7 +2,7 @@
 <div id="nav" class="nav-container d-flex">
     <div class="nav-content d-flex">
         <div class="logo position-relative">
-            <a href="{{route('dashboard')}}">
+            <a href="{{route('home')}}">
                 <div class="img"></div>
             </a>
         </div>
@@ -20,14 +20,14 @@
                     <div class="col-6 ps-1 pe-1">
                         <ul class="list-unstyled">
                             <li>
-                                <a href="{{route('dashboard.users.edit',Auth::user())}}">{{ Auth::user()->name }}</a>
+                                <a href="{{route('users.edit',Auth::user())}}">{{ Auth::user()->name }}</a>
                             </li>
                         </ul>
                     </div>
                     <div class="col-6 pe-1 ps-1">
                         <ul class="list-unstyled">
                             <li>
-                                <a href="{{route('dashboard.companies.edit',Auth::user()->company)}}">{{Auth::user()->company->name}}</a>
+                                <a href="{{route('companies.edit',Auth::user()->company)}}">{{Auth::user()->company->name}}</a>
                             </li>
                         </ul>
                     </div>
@@ -65,7 +65,7 @@
                                     @csrf
                                 </form>
 
-                                <a href="{{ route('logout') }}"  onclick="event.preventDefault();
+                                <a href="{{ route('logout') }}" onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
                                     <i data-cs-icon="logout" class="me-2" data-cs-size="17"></i>
                                     <span class="align-middle">Logout</span>
@@ -98,9 +98,9 @@
         <div class="menu-container flex-grow-1">
             <ul id="menu" class="menu">
                 <li>
-                    <a href="{{ route('dashboard') }}">
+                    <a href="{{ route('home') }}">
                         <i data-cs-icon="shop" class="icon" data-cs-size="18"></i>
-                        <span class="label">{{__('Dashboard')}}</span>
+                        <span class="label">{{__('home')}}</span>
                     </a>
                 </li>
                 <li>
@@ -110,12 +110,12 @@
                     </a>
                     <ul id="products">
                         <li>
-                            <a href="{{route('dashboard.items.create')}}">
+                            <a href="{{route('items.create')}}">
                                 <span class="label">{{__('Add')}}</span>
                             </a>
                         </li>
                         <li>
-                            <a href="{{route('dashboard.items.index')}}">
+                            <a href="{{route('items.index')}}">
                                 <span class="label">{{__('Catalogue')}}</span>
                             </a>
                         </li>
@@ -125,7 +125,7 @@
                             </a>
                         </li>
                         <li>
-                            <a href="{{route('dashboard.categories.index')}}">
+                            <a href="{{route('categories.index')}}">
                                 <span class="label">{{__('Categories')}}</span>
                             </a>
                         </li>
@@ -138,7 +138,7 @@
                     </a>
                     <ul id="orders">
                         <li hidden>
-                            <a href="{{route('dashboard.sellings.index')}}">
+                            <a href="{{route('sellings.index')}}">
                                 <span class="label">Commandes</span>
                             </a>
                         </li>
@@ -154,20 +154,20 @@
                             </a>
                         </li>
                         <li hidden>
-                            <a href="{{route('dashboard.pos')}}">
+                            <a href="{{route('pos')}}">
                                 <span class="label">POS</span>
                             </a>
                         </li>
                     </ul>
                 </li>
                 <li>
-                    <a href="{{route('dashboard.users.index')}}">
+                    <a href="{{route('users.index')}}">
                         <i data-cs-icon="user" class="icon" data-cs-size="18"></i>
                         <span class="label">{{__('Users')}}</span>
                     </a>
                 </li>
                 <li hidden>
-                    <a  href="#">
+                    <a href="#">
                         <i data-cs-icon="shipping" class="icon" data-cs-size="18"></i>
                         <span class="label">Livraison</span>
                     </a>
@@ -179,7 +179,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="{{route('dashboard.companies.edit',Auth::user()->company)}}">
+                    <a href="{{route('companies.edit',Auth::user()->company)}}">
                         <i data-cs-icon="gear" class="icon" data-cs-size="18"></i>
                         <span class="label">{{Auth::user()->company->name}}</span>
                     </a>

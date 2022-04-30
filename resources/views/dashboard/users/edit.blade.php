@@ -1,7 +1,7 @@
 @extends('adminlte::page')
 @section('content')
     <div class="container">
-    
+
         <div class="row">
             <div class="col-12 col-xl-4 col-xxl-3">
                 <h2 hidden class="small-title">Profile</h2>
@@ -30,12 +30,12 @@
             </div>
             <div class="col-12 col-xl-8 col-xxl-9 mb-5 tab-content">
                 <div class="tab-pane fade show active" id="overviewTab" role="tabpanel">
-                   
+
                     <h2 hidden class="small-title">Activity</h2>
                     <div class="card mb-5">
                         <div class="card-body">
                             @if((auth()->user()->isAdmin() AND !$user->isAdmin()) OR Auth::id() == $user->id)
-                                <form action="{{route("dashboard.users.update",$user)}}" enctype="multipart/form-data"
+                                <form action="{{route("users.update",$user)}}" enctype="multipart/form-data"
                                       method="POST"
                                       class="form-horizontal">
                                     @csrf @method('PUT')
@@ -93,7 +93,7 @@
                                             </div>
                                         </div>
                                     @else
-                                        <input type="hidden"  name="role" value="{{$user->role->id}}">
+                                        <input type="hidden" name="role" value="{{$user->role->id}}">
                                     @endif
 
 

@@ -1,4 +1,4 @@
-@extends('dashboard.layout')
+@extends('layout')
 
 @section('content')
     <?php $i = 0;$j = 0?>
@@ -28,7 +28,7 @@
                                         <td>{{$detail->item->selling_price}} {{auth()->user()->currency()}}</td>
                                         <td>
                                             <form method="post" class="pull-right"
-                                                  action="{{route('dashboard.selling_details.destroy',$detail)}}">
+                                                  action="{{route('selling_details.destroy',$detail)}}">
                                                 @csrf @method('DELETE')
                                                 <button type="submit" class="btn btn-danger btn-sm">
                                                     <i class="fa fa-remove"></i>
@@ -43,7 +43,7 @@
                         </div>
                         <div>
                             <form method="post"
-                                  action="{{route('dashboard.sellings.update',$selling)}}">
+                                  action="{{route('sellings.update',$selling)}}">
                                 @csrf @method('PUT')
                                 <input type="hidden" value="1" name="paid">
                                 @if ($selling->sellingDetails->count()>0)
@@ -69,7 +69,8 @@
                         <small>{{$title}}</small>
                     </div>
                     <div class="card-body card-block">
-                        <form action="{{route("dashboard.selling_details.store")}}" method="POST" class="form-horizontal">
+                        <form action="{{route("selling_details.store")}}" method="POST"
+                              class="form-horizontal">
                             @csrf @method('POST')
                             <div class="row form-group">
                                 <div class="col col-md-3">
@@ -148,7 +149,7 @@
             <div class="col-12">
                 <div class="card">
                     <div class="card-header">
-                        <a href="{{route('dashboard')}}" class="btn btn-lg btn-outline-primary">
+                        <a href="{{route('home')}}" class="btn btn-lg btn-outline-primary">
                             <i class="fa fa-chevron-left fa-lg"></i>&nbsp;
                             <span
                                 id="payment-button-amount">{{__('Retour')}}</span>

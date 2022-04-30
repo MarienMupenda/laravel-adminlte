@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use App\Http\Controllers\Controller;
 use App\Models\Role;
 use App\Models\User;
@@ -28,7 +29,7 @@ class UserController extends Controller
             'users' => User::where('company_id', auth()->user()->company_id)->get(),
         ];
 
-        return view('dashboard.users.index', $data)->with('title', __('Utilisateurs'));
+        return view('users.index', $data)->with('title', __('Utilisateurs'));
 
     }
 
@@ -39,7 +40,7 @@ class UserController extends Controller
      */
     public function create()
     {
-        return view('dashboard.users.create')->with('title', 'Créer un nouvel utilisateur');
+        return view('users.create')->with('title', 'Créer un nouvel utilisateur');
 
     }
 
@@ -92,7 +93,7 @@ class UserController extends Controller
     public function edit(User $user)
     {
         $roles = Role::all();
-        return view('dashboard.users.edit', ['user'=>$user,'roles'=>$roles])->with('title', $user->name);
+        return view('users.edit', ['user' => $user, 'roles' => $roles])->with('title', $user->name);
 
 
     }

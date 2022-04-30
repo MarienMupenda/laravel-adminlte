@@ -1,4 +1,4 @@
-@extends('dashboard.layout')
+@extends('layout')
 
 @section('content')
 
@@ -6,7 +6,7 @@
         <div class="row g-0">
             <div class="col-auto mb-3 mb-md-0 me-auto">
                 <div class="w-auto sw-md-30">
-                    <a href="{{route('dashboard')}}" class="muted-link pb-1 d-inline-block breadcrumb-back">
+                    <a href="{{route('home')}}" class="muted-link pb-1 d-inline-block breadcrumb-back">
                         <i data-cs-icon="chevron-left" data-cs-size="13"></i>
                         <span class="text-small align-middle">{{__('Dasboard')}}</span>
                     </a>
@@ -16,7 +16,7 @@
             <div class="w-100 d-md-none"></div>
             <div
                 class="col-12 col-sm-6 col-md-auto d-flex align-items-end justify-content-end mb-2 mb-sm-0 order-sm-3">
-                <a href="{{route('dashboard.items.create')}}" type="button"
+                <a href="{{route('items.create')}}" type="button"
                    class="btn btn-outline-primary btn-icon btn-icon-start ms-0 ms-sm-1 w-100 w-md-auto">
                     <i data-cs-icon="plus"></i>
                     <span>{{__('Add')}}</span>
@@ -138,14 +138,14 @@
                 @foreach($items as $item)
                     <div class="card mb-2">
                         <div class="row g-0 h-100 sh-lg-9 position-relative">
-                            <a href="{{route('dashboard.items.edit',$item)}}" class="col-auto position-relative">
+                            <a href="{{route('items.edit',$item)}}" class="col-auto position-relative">
                                 <img src="{{asset($item->image_small())}}" alt="product"
                                      class="card-img card-img-horizontal h-100 sw-11" style="height: 75px">
                             </a>
                             <div class="col py-4 py-lg-0">
                                 <div class="ps-5 pe-4 h-100">
                                     <div class="row g-0 h-100 align-content-center">
-                                        <a href="{{route('dashboard.items.edit',$item)}}"
+                                        <a href="{{route('items.edit',$item)}}"
                                            class="col-11 col-lg-3 d-flex flex-column mb-lg-0 mb-3 pe-3 d-flex order-1 h-lg-100 justify-content-center">
                                             {{$item->name}}
                                             <div class="text-small text-muted text-truncate position">

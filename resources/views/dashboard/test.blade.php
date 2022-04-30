@@ -550,7 +550,7 @@
 <script src="http://127.0.0.1:8000/acorn/js/vendor/jquery.barrating.min.js"></script>
 
 <script src="http://127.0.0.1:8000/acorn/js/cs/charts.extend.js"></script>
-<script src="http://127.0.0.1:8000/acorn/js/pages/dashboard.js"></script>
+<script src="http://127.0.0.1:8000/acorn/js/pages/js"></script>
 
 <script>
     function readyLink() {

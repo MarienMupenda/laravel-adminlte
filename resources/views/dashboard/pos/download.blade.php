@@ -1,4 +1,4 @@
-@extends('dashboard.layout')
+@extends('layout')
 
 @section('content')
 
@@ -13,7 +13,7 @@
                         <li class="breadcrumb-item"><a href="javascript:void(0);">{{$title}}</a></li>
                     </ol>
                 </div>
-                <a href="{{route('dashboard.items.create')}}" class="white_btn3"><i class="zmdi zmdi-cloud-upload w3-xlarge"></i></a>
+                <a href="{{route('items.create')}}" class="white_btn3"><i class="zmdi zmdi-cloud-upload w3-xlarge"></i></a>
             </div>
         </div>
     </div>

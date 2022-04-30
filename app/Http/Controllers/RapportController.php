@@ -41,7 +41,7 @@ class RapportController extends Controller
 
         foreach ($sellings as $selling) {
 
-            $btnEdit = '<a href="' . route('dashboard.sellings.show', $selling->selling->id) . '"
+            $btnEdit = '<a href="' . route('sellings.show', $selling->selling->id) . '"
     class="mx-1 shadow btn btn-xs btn-default text-primary" title="Edit">
     <i class="fa fa-lg fa-fw fa-eye"></i>
 </a>';
@@ -68,7 +68,6 @@ class RapportController extends Controller
         ];
 
 
-
         $data = [
             'sellings' => $sellings,
             'from' => Carbon::parse($from),
@@ -84,6 +83,6 @@ class RapportController extends Controller
         //return $sellings;
 
 
-        return view('dashboard.rapports.index', $data);
+        return view('rapports.index', $data);
     }
 }

@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use App\Http\Controllers\Controller;
 use App\Models\Category;
 use App\Models\Item;
@@ -26,15 +27,15 @@ class SellingController extends Controller
     {
 
         $data = [
-            'sellings' => Selling::orderBy('id', 'DESC')->where('company_id',auth()->user()->company_id)->paginate(10),
-            'sellings2' => Selling::orderBy('id', 'DESC')->where('company_id',auth()->user()->company_id)->whereDate('created_at', Carbon::today())->paginate(10),
+            'sellings' => Selling::orderBy('id', 'DESC')->where('company_id', auth()->user()->company_id)->paginate(10),
+            'sellings2' => Selling::orderBy('id', 'DESC')->where('company_id', auth()->user()->company_id)->whereDate('created_at', Carbon::today())->paginate(10),
             'items_count' => count(Item::all()),
             'today_sales' => 23,
             'week_sales' => 23,
             'month_sales' => 2,
         ];
 
-        return view('dashboard.sellings.index', $data)->with('title', __('Sellings'));
+        return view('sellings.index', $data)->with('title', __('Sellings'));
     }
 
     /**
@@ -49,7 +50,7 @@ class SellingController extends Controller
             'items' => Item::all(),
         ];
 
-        return view('dashboard.sellings.create', $data)->with('title', 'Nouvelle Commande');
+        return view('sellings.create', $data)->with('title', 'Nouvelle Commande');
 
     }
 
@@ -86,12 +87,12 @@ class SellingController extends Controller
     {
         $data = [
             'categories' => Category::all(),
-            'items' => Item::orderBy('name','asc')->where('company_id', Auth::user()->company_id)->get(),
+            'items' => Item::orderBy('name', 'asc')->where('company_id', Auth::user()->company_id)->get(),
             'selling' => $selling,
         ];
 
 
-       return view('dashboard.sellings.show', $data)->with('title', 'COMMANDE #' . $selling->makeInvoice());
+        return view('sellings.show', $data)->with('title', 'COMMANDE #' . $selling->makeInvoice());
 
     }
 

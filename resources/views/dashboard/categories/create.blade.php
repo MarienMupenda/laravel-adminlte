@@ -9,7 +9,7 @@
 
 
             <div class="card-body card-block">
-                <form action="{{route("dashboard.categories.store")}}" method="POST" class="form-horizontal">
+                <form action="{{route("categories.store")}}" method="POST" class="form-horizontal">
                     @csrf @method('POST')
                     <div class="row form-group">
                         <div class="col col-md-3">
@@ -22,7 +22,7 @@
 
                     <div class="card-footer">
 
-                        <a href="{{route("dashboard.categories.index")}}" class="btn btn-outline-primary btn-sm">
+                        <a href="{{route("categories.index")}}" class="btn btn-outline-primary btn-sm">
                             <i class="fa fa-chevron-left"></i> {{__('Back')}}
                         </a>
                         <button type="submit" class="btn btn-primary btn-sm">

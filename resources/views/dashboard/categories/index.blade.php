@@ -6,7 +6,7 @@ $i = 0;
 @section('content')
     <div class="container-fluid p-0 ">
         <div class="page-title-container">
-        
+
             <div class="row">
                 <div class="col-8">
                     <div class="card card-body mb-3">
@@ -34,7 +34,7 @@ $i = 0;
                                             <div class="w-100 d-flex justify-content-center">
                                                 @if ($category->items->count()==0)
                                                     <form method="post" class="pull-right"
-                                                          action="{{route('dashboard.categories.destroy',$category)}}">
+                                                          action="{{route('categories.destroy',$category)}}">
                                                         @csrf @method('DELETE')
                                                         <button class="btn btn-outline-danger btn-sm">
                                                             <i class="fa fa-trash"></i>
@@ -42,7 +42,7 @@ $i = 0;
                                                     </form>
                                                 @endif
                                                 @if (Auth::user()->isSuperAdmin() or true)
-                                                    <a href="{{route('dashboard.categories.edit',$category)}}"
+                                                    <a href="{{route('categories.edit',$category)}}"
                                                        class="btn btn-outline-primary btn-sm">
                                                         <i class="fa fa-edit"></i>
                                                     </a>
@@ -61,7 +61,7 @@ $i = 0;
                 </div>
                 <div class="col-4">
                     <div class="card card-body">
-                        <form action="{{route("dashboard.categories.store")}}" method="POST" class="form-horizontal">
+                        <form action="{{route("categories.store")}}" method="POST" class="form-horizontal">
                             @csrf @method('POST')
                             <div class="row form-group">
                                 <div class="col-12 col-md-9">

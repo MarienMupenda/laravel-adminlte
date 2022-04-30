@@ -3,10 +3,10 @@
 @inject('layoutHelper', 'JeroenNoten\LaravelAdminLte\Helpers\LayoutHelper')
 
 @section('adminlte_css')
-    @include('dashboard.includes.css_top')
+    @include('includes.css_top')
     @stack('css')
     @yield('css')
-    
+
 @stop
 
 @section('classes_body', $layoutHelper->makeBodyClasses())
@@ -31,7 +31,7 @@
         @section('title', $title)
 
         @section('content_header')
-            <h1>{{$title}}</h1> 
+            <h1>{{$title}}</h1>
         @stop
 
         {{-- Content Wrapper --}}
@@ -55,7 +55,7 @@
 @stop
 
 @section('adminlte_js')
-    @include('dashboard.includes.js_bottom')
+    @include('includes.js_bottom')
     @stack('js')
     @yield('js')
 @stop

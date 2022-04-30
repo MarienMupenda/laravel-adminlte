@@ -2,87 +2,69 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
+use App\Http\Resources\ItemResource;
+use App\Models\Company;
 use App\Models\Item;
-use App\Models\Order;
-use App\Models\OrderItem;
-use App\Models\Selling;
-use App\Models\SellingDetail;
-use App\Models\User;
-use Auth;
-use Carbon\Carbon;
-use Illuminate\Contracts\Foundation\Application;
-use Illuminate\Contracts\View\Factory;
-use Illuminate\Contracts\View\View;
+use Illuminate\Contracts\Database\Eloquent\Builder;
+use Illuminate\Contracts\Support\Renderable;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Schema;
+
+use function App\Helpers\Helpers;
 
 class HomeController extends Controller
 {
-
+    /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
     public function __construct()
     {
-        $this->middleware('auth:web');
+        //  $this->middleware('auth');
     }
-
 
     /**
      * Show the application dashboard.
      *
-     * @return Application|Factory|View
+     * @return Renderable
      */
-    public function index()
+    public function index(Request $request)
     {
 
-        $company = auth()->user()->company;
-
-        // $top_selling_items = Item::with('sellingDetails')
-        $top_sold_items = Item::leftJoin('order_items', 'items.id', '=', 'item_id')
-            ->selectRaw('items.*, COALESCE(sum(order_items.qty),0) total')
-            ->groupBy('items.id')
-            ->orderBy('total', 'desc')
-            ->where('company_id', $company->id)
-            ->take(5)
-            ->get();
+        $items = Item::query();
+        $items->with(['promotions', 'category', 'company'])->orderByDesc('created_at')
+            ->where('state', Item::STATE_PUBLISHED);
+        $items = $items->where('state', Item::STATE_PUBLISHED)->whereHas('company', function (Builder $q) {
+            $q->where('state', Company::STATE_ACTIVE);
+        });
+        $items = ItemResource::collection($items->limit(4)->get());
 
 
-        $home = [
-            //'items' => Item::where('company_id', $company->id)->count(),
-            'items' => Item::where('company_id', $company->id)->count(),
-            'orders' => Order::orderBy('id', 'desc')->where('company_id', $company->id)->count(),
-            'earning' => $this->getEarnins(),
-            'currency' => $company->currency->symbol,
-            //'users' => User::where('company_id', $company->id)->count(),
-            'users' => 1,
-            'returns' => 0,
-            'comments' => 0,
-            //'sessions' => 2,
-            'recent_orders' => Order::orderBy('id', 'desc')->where('company_id', $company->id)->take(10)->get(),
-            'top_sold_items' => $top_sold_items,
+        $page  = [
+            'title' => 'Uzaraka - Le grand marché de Lubumbashi',
+            'description' => 'bienvenu sur uzaraka',
+            'url' => '/',
+            'topItems' => $items,
+            'topCompany' => $items,
+            'recentItems' => $items,
         ];
 
 
-        return view('dashboard.index', $home)->with('title', 'Dashboard');
+
+
+        return view('index')->with('page', (object)$page);
     }
 
-    private function getEarnins()
+    public function products()
     {
 
-        $from = Carbon::now()->startOfMonth();
-        $to = Carbon::tomorrow();
+        $page  = [
+            'title' => 'Home',
+            'description' => 'bienvenu sur uzaraka',
+            'url' => '/'
+        ];
 
-        $sellings = OrderItem::with(['item'])
-            ->whereHas('item', function ($q) {
-                $q->where('company_id', Auth::user()->company_id);
-            })
-            ->whereBetween('created_at', [$from, $to])
-            ->get();
-
-
-        $total = 0;
-
-        foreach ($sellings as $selling) {
-            $total += $selling->selling_price;
-        }
-
-        return $total;
+        return view('index')->with('page', (object)$page);
     }
 }

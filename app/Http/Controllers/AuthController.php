@@ -2,14 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Models\Business;
-use App\Models\Currency;
-use App\Models\User;
 use App\Models\Company;
 use App\Models\Contact;
-use Hash;
+use App\Models\Currency;
+use App\Models\User;
 use Auth;
+use Hash;
+use Illuminate\Http\Request;
 
 class AuthController extends Controller
 {
@@ -18,6 +18,7 @@ class AuthController extends Controller
     {
         return view('auth.login');
     }
+
     public function postLogin(Request $request)
     {
         $this->validate($request, [
@@ -30,9 +31,9 @@ class AuthController extends Controller
                 if (auth()->user()->isSuperAdmin()) {
                     return redirect()->route('admin');
                 } elseif (auth()->user()->hasActiveCompany()) {
-                    return redirect()->route('dashboard');
+                    return redirect()->route('home');
                 }
-                return redirect()->route('dashboard')->with('error', Company::MESSAGE_NOT_ACTIVE);
+                return redirect()->route('home')->with('error', Company::MESSAGE_NOT_ACTIVE);
             }
 
             return redirect()->route('login');
@@ -86,10 +87,11 @@ class AuthController extends Controller
 
         if ($user) {
             Auth::login($user);
-            return redirect()->route('dashboard');
+            return redirect()->route('home');
         }
         return redirect()->back()->with('error', 'Une erreur est survenue');
     }
+
     public function logout()
     {
         auth()->logout();
