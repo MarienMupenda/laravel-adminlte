@@ -142,8 +142,8 @@ class UserController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param int $id
-     * @return Application|RedirectResponse|Response|Redirector
+     * @param User $user
+     * @return Application|Redirector|RedirectResponse
      */
     public function destroy(User $user)
     {
