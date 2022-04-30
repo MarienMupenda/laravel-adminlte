@@ -6,10 +6,8 @@ use App\DataTables\UserTable;
 use App\Helpers\Helpers;
 use App\Traits\HasLaTable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Jenssegers\Date\Date;
 use Laravel\Passport\HasApiTokens;
@@ -60,13 +58,14 @@ class User extends Authenticatable
         return $this->hasMany(Company::class);
     }
 
-    public function company()
-    {
-        return $this->hasOne(Company::class);
-    }
     public function hasActiveCompany()
     {
         return $this->company()->where('state', 'active')->exists();
+    }
+
+    public function company()
+    {
+        return $this->hasOne(Company::class);
     }
 
     public function createdAt()
@@ -95,9 +94,9 @@ class User extends Authenticatable
         return $this->hasOne(Profile::class);
     }
 
-    public function role()
+    public function roles()
     {
-        return $this->belongsTo(Role::class);
+        return $this->hasManyThrough(Role::class, UserRole::class, 'user_id', 'id', 'id', 'role_id');
     }
 
     public function customer()
@@ -105,37 +104,29 @@ class User extends Authenticatable
         return $this->hasOne(Customer::class);
     }
 
-    public function get_customer()
-    {
-        if ($this->customer == null) {
-            $customer = new Customer();
-            $customer->user_id = $this->id;
-            $customer->save();
-
-            return $customer;
-        }
-        return  $this->customer;
-    }
-
-
-    public function purchasings()
-    {
-        return $this->hasMany(Purchasing::class);
-    }
-
-    public function getLocalizationAttribute()
-    {
-        return optional($this->profile ?? 'en')->lang ?? 'en';
-    }
 
     public function adminlte_image()
     {
         return $this->image();
     }
 
+    public function image()
+    {
+        if (isset($this->image)) {
+            $file = Helpers::profile_image_public($this->image);
+            if (file_exists($file)) {
+                return asset($file);
+            }
+        }
+        if ($this->company)
+            return $this->company->logo();
+
+        return asset('images/icons/logo.png');
+    }
+
     public function adminlte_desc()
     {
-        return $this->role->name;
+        return $this->roles->first()->name;
     }
 
     public function adminlte_profile_url()
@@ -151,20 +142,6 @@ class User extends Authenticatable
     public function getIsOwnerAttribute(): bool
     {
         return $this->getRoleNames()->first() == 'owner';
-    }
-
-    public function image()
-    {
-        if (isset($this->image)) {
-            $file = Helpers::profile_image_public($this->image);
-            if (file_exists($file)) {
-                return asset($file);
-            }
-        }
-        if ($this->company)
-            return $this->company->logo();
-
-        return asset('images/icons/logo.png');
     }
 
     public
