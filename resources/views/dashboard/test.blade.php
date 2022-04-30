@@ -133,7 +133,7 @@
                         <div class="col-6 ps-1 pe-1">
                             <ul class="list-unstyled">
                                 <li>
-                                    <a href="http://127.0.0.1:8000/dashboard/users/20/edit">jean pierre</a>
+                                    <a href="http://127.0.0.1:8000/users/20/edit">jean pierre</a>
                                 </li>
                                 <li hidden>
                                     <a href="#">Preferences</a>
@@ -146,7 +146,7 @@
                         <div class="col-6 pe-1 ps-1">
                             <ul class="list-unstyled">
                                 <li>
-                                    <a href="http://127.0.0.1:8000/dashboard/companies/25/edit">GOLGOTHA</a>
+                                    <a href="http://127.0.0.1:8000/companies/25/edit">GOLGOTHA</a>
                                 </li>
                                 <li hidden>
                                     <a href="#">Billing</a>
@@ -267,7 +267,7 @@
                         </a>
                         <ul id="products">
                             <li>
-                                <a href="http://127.0.0.1:8000/dashboard/items">
+                                <a href="http://127.0.0.1:8000/items">
                                     <span class="label">Articles</span>
                                 </a>
                             </li>
@@ -277,7 +277,7 @@
                                 </a>
                             </li>
                             <li>
-                                <a href="http://127.0.0.1:8000/dashboard/categories">
+                                <a href="http://127.0.0.1:8000/categories">
                                     <span class="label">Categories</span>
                                 </a>
                             </li>
@@ -290,12 +290,12 @@
                         </a>
                         <ul id="orders">
                             <li>
-                                <a href="http://127.0.0.1:8000/dashboard/sellings">
+                                <a href="http://127.0.0.1:8000/sellings">
                                     <span class="label">Commandes</span>
                                 </a>
                             </li>
                             <li>
-                                <a href="http://127.0.0.1:8000/dashboard/rapports">
+                                <a href="http://127.0.0.1:8000/rapports">
                                     <span class="label">Rapports</span>
                                 </a>
                             </li>
@@ -313,7 +313,7 @@
                         </ul>
                     </li>
                     <li>
-                        <a href="http://127.0.0.1:8000/dashboard/users">
+                        <a href="http://127.0.0.1:8000/users">
                             <i data-cs-icon="user" class="icon" data-cs-size="18"></i>
                             <span class="label">Utilisateurs</span>
                         </a>
@@ -375,7 +375,7 @@
                         </a>
                     </li>
                     <li>
-                        <a href="http://127.0.0.1:8000/dashboard/companies/25/edit">
+                        <a href="http://127.0.0.1:8000/companies/25/edit">
                             <i data-cs-icon="gear" class="icon" data-cs-size="18"></i>
                             <span class="label">GOLGOTHA</span>
                         </a>
@@ -554,7 +554,7 @@
 
 <script>
     function readyLink() {
-        var url = 'http://127.0.0.1:8000/dashboard/rapports/' + $('#from').val() + '/' + $('#to').val();
+        var url = 'http://127.0.0.1:8000/rapports/' + $('#from').val() + '/' + $('#to').val();
 
         $("#href").attr('href', url);
         console.log(url);

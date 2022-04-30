@@ -228,12 +228,12 @@ return [
     'menu' => [
         // Navbar items:
         [
-            'type'         => 'navbar-search',
-            'text'         => 'search',
+            'type' => 'navbar-search',
+            'text' => 'search',
             'topnav_right' => true,
         ],
         [
-            'type'         => 'fullscreen-widget',
+            'type' => 'fullscreen-widget',
             'topnav_right' => true,
         ],
 
@@ -244,44 +244,44 @@ return [
         ],
 
         [
-            'text'    => 'Produits',
-            'icon'    => 'fas fa-fw fa-list',
+            'text' => 'Articles',
+            'icon' => 'fas fa-fw fa-list',
             'submenu' => [
                 [
-                    'text' => 'Ajouter',
-                    'url'  => '/dashboard/items/create',
+                    'text' => 'Produits',
+                    'url' => '/products',
                 ],
                 [
-                    'text' => 'Catalogue',
-                    'url'  => '/dashboard/items',
+                    'text' => 'Livres',
+                    'url' => '/books',
                 ],
                 [
                     'text' => 'Categories',
-                    'url'  => '/dashboard/categories',
+                    'url' => '/categories',
                 ],
             ],
         ],
 
         [
-            'text'    => 'Ventes',
-            'icon'    => 'fas fa-fw fa-chart-bar',
+            'text' => 'Ventes',
+            'icon' => 'fas fa-fw fa-chart-bar',
             'submenu' => [
                 [
                     'text' => 'Rapport',
-                    'url'  => '/dashboard/rapports',
+                    'url' => '/rapports',
                 ],
             ],
         ],
 
         [
-            'text'       => 'Utilisateurs',
+            'text' => 'Utilisateurs',
             'icon' => 'fas fa-fw fa-users',
-            'url'        => '/dashboard/users',
+            'url' => '/users',
         ],
         [
-            'text'       => 'Paramettres',
+            'text' => 'Paramettres',
             'icon' => 'zmdi zmdi-settings',
-            'url'        => '/dashboard/settings',
+            'url' => '/settings',
         ],
 
     ],

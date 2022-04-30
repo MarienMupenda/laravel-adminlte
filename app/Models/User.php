@@ -131,7 +131,7 @@ class User extends Authenticatable
 
     public function adminlte_profile_url()
     {
-        return "/dashboard/users/$this->id/edit";
+        return "/users/$this->id/edit";
     }
 
     /**

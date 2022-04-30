@@ -4,6 +4,7 @@
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CompanyController;
 use App\Http\Controllers\ContactController;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ItemController;
 use App\Http\Controllers\RapportController;
 use App\Http\Controllers\SellingController;
@@ -11,7 +12,6 @@ use App\Http\Controllers\SellingDetailController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\HomeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -25,6 +25,8 @@ use App\Http\Controllers\HomeController;
 */
 
 
+Auth::routes();
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::get('/', [HomeController::class, 'index'])->middleware(['auth'])->name('dashboard');
 Route::get('/', [HomeController::class, 'index'])->name('home');
 
@@ -53,8 +55,3 @@ Route::post('git-deploy', function () {
     return __('The action ran successfully!');
 });
 
-require __DIR__.'/auth.php';
-
-Auth::routes();
-
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

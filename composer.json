@@ -20,7 +20,6 @@
         "jorenvanhocht/laravel-share": "^4.1",
         "laravel-lang/lang": "~8.0",
         "laravel/framework": "^9.0",
-        "laravel/passport": "^10.1",
         "laravel/tinker": "^2.5",
         "laravel/ui": "^3.4",
         "laravelcollective/html": "^6.2"
