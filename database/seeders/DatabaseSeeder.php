@@ -2,7 +2,7 @@
 
 namespace Database\Seeders;
 
-use App\Http\Controllers\Dashboard\BussinessApi;
+use App\Http\Controllers\BussinessApi;
 use App\Models\Business;
 use App\Models\Category;
 use App\Models\Company;
