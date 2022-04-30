@@ -14,6 +14,7 @@
         "fruitcake/laravel-cors": "^2.0",
         "guzzlehttp/guzzle": "^7.0.1",
         "intervention/image": "^2.6",
+        "itsgoingd/clockwork": "^5.1",
         "jenssegers/date": "^4.0",
         "jeroennoten/laravel-adminlte": "^3.7",
         "jorenvanhocht/laravel-share": "^4.1",

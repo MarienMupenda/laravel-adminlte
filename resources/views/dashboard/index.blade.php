@@ -80,7 +80,7 @@
         <h2 class="small-title">Plus vendus</h2>
         <div class="scroll-out mb-n2">
             <div class="scroll-by-count" data-count="4">
-                @foreach ($top_selling_items as $item)
+                @foreach ($top_sold_items as $item)
                 <div class="mb-2 card">
                     <div class="row g-0 sh-14 sh-md-10">
                         <div class="col-auto">

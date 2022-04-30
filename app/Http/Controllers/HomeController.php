@@ -4,11 +4,16 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use App\Models\Item;
+use App\Models\Order;
+use App\Models\OrderItem;
 use App\Models\Selling;
 use App\Models\SellingDetail;
 use App\Models\User;
+use Auth;
 use Carbon\Carbon;
 use Illuminate\Contracts\Foundation\Application;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Contracts\View\View;
 
 class HomeController extends Controller
 {
@@ -22,15 +27,16 @@ class HomeController extends Controller
     /**
      * Show the application dashboard.
      *
-     * @return Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
+     * @return Application|Factory|View
      */
     public function index()
     {
 
         $company = auth()->user()->company;
+
         // $top_selling_items = Item::with('sellingDetails')
-        $top_selling_items = Item::leftJoin('selling_details', 'items.id', '=', 'selling_details.item_id')
-            ->selectRaw('items.*, COALESCE(sum(selling_details.qty),0) total')
+        $top_sold_items = Item::leftJoin('order_items', 'items.id', '=', 'item_id')
+            ->selectRaw('items.*, COALESCE(sum(order_items.qty),0) total')
             ->groupBy('items.id')
             ->orderBy('total', 'desc')
             ->where('company_id', $company->id)
@@ -41,15 +47,16 @@ class HomeController extends Controller
         $home = [
             //'items' => Item::where('company_id', $company->id)->count(),
             'items' => Item::where('company_id', $company->id)->count(),
-            'orders' => Selling::orderBy('id', 'desc')->where('company_id', $company->id)->count(),
+            'orders' => Order::orderBy('id', 'desc')->where('company_id', $company->id)->count(),
             'earning' => $this->getEarnins(),
             'currency' => $company->currency->symbol,
-            'users' => User::where('company_id', $company->id)->count(),
+            //'users' => User::where('company_id', $company->id)->count(),
+            'users' => 1,
             'returns' => 0,
             'comments' => 0,
             //'sessions' => 2,
-            'recent_orders' => Selling::orderBy('id', 'desc')->where('company_id', $company->id)->take(10)->get(),
-            'top_selling_items' => $top_selling_items,
+            'recent_orders' => Order::orderBy('id', 'desc')->where('company_id', $company->id)->take(10)->get(),
+            'top_sold_items' => $top_sold_items,
         ];
 
 
@@ -62,11 +69,10 @@ class HomeController extends Controller
         $from = Carbon::now()->startOfMonth();
         $to = Carbon::tomorrow();
 
-        $sellings = SellingDetail::with(['item'])
+        $sellings = OrderItem::with(['item'])
             ->whereHas('item', function ($q) {
-                $q->where('company_id', \Auth::user()->company_id);
+                $q->where('company_id', Auth::user()->company_id);
             })
-
             ->whereBetween('created_at', [$from, $to])
             ->get();
 
