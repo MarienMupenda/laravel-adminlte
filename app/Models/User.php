@@ -18,7 +18,7 @@ class User extends Authenticatable
 {
 
 
-    use HasFactory, Notifiable, HasApiTokens;
+    use HasFactory, Notifiable;
 
     public const PROFILE_DIR = 'public/users';
     public const PROFILE_DIR_PUCLIC = 'storage/users';
