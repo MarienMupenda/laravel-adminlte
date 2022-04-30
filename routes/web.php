@@ -11,7 +11,6 @@ use App\Http\Controllers\SellingDetailController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\AuthController;
 use App\Http\Controllers\HomeController;
 
 /*
@@ -26,15 +25,7 @@ use App\Http\Controllers\HomeController;
 */
 
 
-//
-//Auth::routes();
-Route::get('login', [AuthController::class, 'login'])->name('login');
-Route::post('login', [AuthController::class, 'postLogin'])->name('postLogin');
-Route::get('register', [AuthController::class, 'register'])->name('register');
-Route::post('register', [AuthController::class, 'postRegister'])->name('postRegister');
-Route::post('logout', [AuthController::class, 'logout'])->name('logout');
-
-
+Route::get('/', [HomeController::class, 'index'])->middleware(['auth'])->name('dashboard');
 Route::get('/', [HomeController::class, 'index'])->name('home');
 
 Route::middleware(['auth:web', 'user_company'])->as('dashboard.')->group(function () {
@@ -61,3 +52,5 @@ Route::post('git-deploy', function () {
     Artisan::call('git:deploy');
     return __('The action ran successfully!');
 });
+
+require __DIR__.'/auth.php';
