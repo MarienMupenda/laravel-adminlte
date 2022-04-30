@@ -1,0 +1,20 @@
+/node_modules
+/public/hot
+/public/storage
+/.history
+/.idea
+/storage/*.key
+/vendor
+.env
+.env.backup
+.phpunit.result.cache
+docker-compose.override.yml
+Homestead.json
+Homestead.yaml
+npm-debug.log
+yarn-error.log
+uzaraka.zip
+
+# Project exclude paths
+/public/vendor/onscan.js/.github/
+/public/vendor/onscan.js/.settings/

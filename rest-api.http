@@ -1,0 +1,155 @@
+GET  https://business.smirl.org/api/v1/items?favoris=[4,2]
+Accept: application/json
+Content-Type: application/json
+
+###
+POST https://paydrc.gofreshbakery.net/api/v5
+Accept: application/json
+Content-Type: application/json
+
+{
+    "merchant_id": "jgQ65)(pFgB>2aqqb",
+    "merchant_secrete": "jzAu6TLFovQqnIUu6b",
+    "firstname": "SmirlTech",
+    "lastname": "SmirlTech",
+    "method" : "airtel",
+    "action" : "debit",
+    "customer_number" : "0970966587",
+    "amount" : "100",
+    "currency" :"CDF",
+    "reference" :"smirltech",
+    "e-mail" : "smirltech@gmail.com"
+}
+
+###
+POST  https://business.smirl.org/api/v1/categories?_app=web&company_id=20
+Accept: application/json
+
+###
+GET https://uzaraka.com/api/v1/sellings?customer_id=2&state=pending
+Accept: application/json
+Content-Type: application/json
+
+###
+GET  https://business.smirl.org/api/v1/businesses
+Accept: application/json
+
+### hfhgf
+GET http://uzaraka.com/api/v1/users/1
+Content-Type: application/json
+Accept: application/json
+
+{
+    "email": "marien@smirl.org",
+    "password": "password"
+}
+
+
+### hfhgf
+POST http://127.0.0.1:8000/api/v1/login
+Content-Type: application/json
+Accept: application/json
+
+{
+    "email": "info@smirl.org",
+    "password": "12345678"
+}
+
+
+###
+POST http://127.0.0.1:8000/api/v1/register
+Content-Type: application/json
+Accept: application/json
+
+{
+    "name": "Admin",
+    "phone": "+243970966587",
+    "email": "adminy@smirl.org",
+    "password": "password"
+}
+
+###
+POST http://127.0.0.1:8000/api/v1/logout
+Content-Type: application/json
+Accept: application/json
+
+{
+
+}
+
+
+###
+PUT http://127.0.0.1:8000/api/v1/sellings/440
+Accept: application/json
+Content-Type: application/json
+
+{
+    "state":"pending"
+}
+
+####
+GET http://api.pay.uzaraka.com/v1/payments/108
+Accept: application/json
+Content-Type: application/json
+
+{
+    "ApiKey":"7906b5f78c716fa8385f71368b4d7c7a77frjde45"
+}
+
+###
+POST http://127.0.0.1:8000/api/v1/sellings
+Content-Type: application/json
+Accept: application/json
+
+{
+    "_app": "store",
+    "selling": {
+        "company_id": 1,
+        "currency_id": 1,
+        "customer_id": 1,
+        "note": "",
+        "items": [
+            {
+                "qty": 1,
+                "name": "test",
+                "selling_price": 4000.0,
+                "item_id": 85
+            }
+        ]
+    },
+    "payment_method": "airtel",
+    "customer_number": "0970966587",
+    "amount": 1000
+}
+
+###
+POST http://127.0.0.1:8000/api/v1/sellings
+Content-Type: application/json
+Accept: application/json
+
+{
+    "_app": "pos",
+    "sellings": [
+        {
+            "id": 947167951,
+            "company_id": 1,
+            "user_id": 3,
+            "customer": "Client",
+            "currency_id": 1,
+            "reference": 1,
+            "products": [
+                {
+                    "qty": 1,
+                    "name": "test",
+                    "selling_price": 4000.0,
+                    "item_id": 85
+                }
+            ]
+        }
+    ]
+}
+
+
+###
+GET  https://business.smirl.org/api/v1/companies
+Accept: application/json

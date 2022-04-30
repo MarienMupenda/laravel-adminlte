@@ -1,0 +1,69 @@
+{
+    "data": [
+        {
+            "id": 499,
+            "name": "ACE banana flavour 1Kg",
+            "barcode": 6001256003344,
+            "description": "bouillie",
+            "selling_price": 5000,
+            "state": "draft",
+            "image": null,
+            "image_small": null,
+            "category": {
+                "id": 1,
+                "category_id": null,
+                "name": "Autre",
+                "icon": "https:\/\/img-premium.flaticon.com\/png\/512\/3405\/premium\/3405828.png?token=exp=1633634302~hmac=1228445650acbd3970a11551e59089a5"
+            },
+            "company": {
+                "id": 25,
+                "name": "GOLGOTHA",
+                "logo": "1632840538.JPEG",
+                "address": "11, Av Adren, Gambela",
+                "rccm": "CD\/LSH\/RCCM\/17-A-5588",
+                "idnat": null,
+                "description": null,
+                "user_id": 20,
+                "state": "pending",
+                "currency": {
+                    "id": 1,
+                    "code": "CDF",
+                    "name": "Franc Congolais",
+                    "symbol": "Fc"
+                }
+            }
+        }
+    ],
+    "links": {
+        "first": "http:\/\/127.0.0.1:8000\/api\/v1\/items?page=1",
+        "last": "http:\/\/127.0.0.1:8000\/api\/v1\/items?page=1",
+        "prev": null,
+        "next": null
+    },
+    "meta": {
+        "current_page": 1,
+        "from": 1,
+        "last_page": 1,
+        "links": [
+            {
+                "url": null,
+                "label": "&laquo; Précédent",
+                "active": false
+            },
+            {
+                "url": "http:\/\/127.0.0.1:8000\/api\/v1\/items?page=1",
+                "label": "1",
+                "active": true
+            },
+            {
+                "url": null,
+                "label": "Suivant &raquo;",
+                "active": false
+            }
+        ],
+        "path": "http:\/\/127.0.0.1:8000\/api\/v1\/items",
+        "per_page": 15,
+        "to": 4,
+        "total": 4
+    }
+}
