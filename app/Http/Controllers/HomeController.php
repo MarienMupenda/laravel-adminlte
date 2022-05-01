@@ -32,7 +32,7 @@ class HomeController extends Controller
 
         // $top_selling_items = Item::with('sellingDetails')
         $top_sold_items = Item::leftJoin('order_items', 'items.id', '=', 'item_id')
-            ->selectRaw('items.*, COALESCE(sum(order_items.qty),0) total')
+            ->selectRaw('items.*, COALESCE(sum(order_items.quantity),0) total')
             ->groupBy('items.id')
             ->orderBy('total', 'desc')
             ->where('company_id', $company->id)

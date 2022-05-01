@@ -7,7 +7,6 @@ use App\Http\Requests\StoreProductRequest;
 use App\Models\Category;
 use App\Models\Currency;
 use App\Models\Item;
-use App\Models\MainCategory;
 use App\Models\Product;
 use App\Models\Unit;
 use Illuminate\Contracts\Foundation\Application;
@@ -20,6 +19,14 @@ use Illuminate\Support\Facades\Auth;
 
 class ProductController extends Controller
 {
+
+    //constructor wich create category
+    private $category;
+
+    public function __construct()
+    {
+        $this->category = Category::find(1);
+    }
 
 
     public function index()
@@ -85,7 +92,7 @@ class ProductController extends Controller
     public function create()
     {
         $data = [
-            'categories' => Category::all(),
+            'categories' => $this->category->children()->get(),
             'units' => Unit::all(),
             'currencies' => Currency::all(),
         ];
@@ -109,7 +116,7 @@ class ProductController extends Controller
         $item->company_id = Auth::user()->company->id;
         $item->save();
 
-        $item->slug = Helpers::slugify($request->name, MainCategory::find(), $item->id);
+        $item->slug = Helpers::slugify($request->name, $this->category->name, $item->id);
         if ($request->hasFile('image')) {
             $item->image = Helpers::uploadItemImage($request, Auth::user()->company->id);
         }
@@ -121,6 +128,8 @@ class ProductController extends Controller
         $product->description = $request->description;
         $product->item_id = $item->id;
         $product->save();
+
+        return $product;
 
         // return redirect(url()->previous())->with('success', __('The action ran successfully!'));
     }
