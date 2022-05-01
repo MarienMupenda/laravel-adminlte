@@ -29,6 +29,7 @@ class StoreProductRequest extends FormRequest
             'category_id' => 'numeric|required',
             'description' => 'string|nullable',
             'price' => 'numeric|nullable|min:1',
+            'currency_id' => 'numeric|required',
             'unit_id' => 'numeric|required',
             'status' => 'string|nullable|in:draft,published,unpublished',
         ];

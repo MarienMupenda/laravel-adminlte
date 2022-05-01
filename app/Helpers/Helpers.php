@@ -2,14 +2,14 @@
 
 namespace App\Helpers;
 
+use App\Mail\SendMail;
 use App\Models\User;
 use Illuminate\Http\Request;
-use App\Mail\SendMail;
-use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 use Intervention\Image\Exception\NotReadableException;
-use phpseclib3\Math\PrimeField\Integer;
 use Intervention\Image\Facades\Image;
+use phpseclib3\Math\PrimeField\Integer;
 
 
 class Helpers
@@ -131,5 +131,10 @@ class Helpers
         }
 
         return $n_format . $suffix;
+    }
+
+    public static function slugify($title, $category, $item_id)
+    {
+        return Str::slug("$category $item_id $title", '-', 'fr');
     }
 }

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Helpers\Helpers;
 use App\Http\Requests\StoreProductRequest;
 use App\Models\Category;
+use App\Models\Currency;
 use App\Models\Item;
 use App\Models\Product;
 use App\Models\Unit;
@@ -85,6 +86,7 @@ class ProductController extends Controller
         $data = [
             'categories' => Category::all(),
             'units' => Unit::all(),
+            'currencies' => Currency::all(),
         ];
         return view('products.create', $data)->with('title', 'Ajouter un produit');
     }
@@ -99,20 +101,23 @@ class ProductController extends Controller
     {
 
         $item = new Item();
-
         $item->category_id = $request->category;
         $item->unit_id = $request->unit_id;
         $item->price = $request->price;
-        $item->description = $request->description;
+        $item->currency_id = $request->currency_id;
         $item->company_id = Auth::user()->company_id;
+        $item->save();
 
+        $item->slug = Helpers::slugify($request->name, 'p', $item->id);
         if ($request->hasFile('image')) {
-            $item->image = Helpers::uploadItemImage($request, auth()->user()->company_id);
+            $item->image = Helpers::uploadItemImage($request, Auth::user()->company_id);
         }
         $item->save();
 
+
         $product = new Product();
         $product->name = $request->name;
+        $product->description = $request->description;
         $product->item_id = $item->id;
         $product->save();
 

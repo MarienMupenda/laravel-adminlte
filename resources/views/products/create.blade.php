@@ -13,19 +13,12 @@
                         <label for="text-input" class="form-control-label">{{__('Name')}}</label>
                     </div>
                     <div class="col-12 col-md-9">
-                        <input type="text" id="text-input" required name="name" placeholder="Nom du produit"
+                        <input type="text" id="text-input" required name="name"
+                               placeholder="Un nom facile à retenir qui identifie votre produit"
                                class="form-control">
                     </div>
                 </div>
-                <div class="row form-group">
-                    <div class="col col-md-3">
-                        <label for="text-input" class=" form-control-label">{{__('Description')}}</label>
-                    </div>
-                    <div class="col-12 col-md-9">
-                            <textarea onpaste="return true;" minlength="1O" maxlength="600" class="form-control"
-                                      rows="3" type="text" id="text-input" name="description"></textarea>
-                    </div>
-                </div>
+
                 <div class="row form-group">
                     <div class="col col-md-3">
                         <label for="email-input" class=" form-control-label">{{__('Category')}}</label>
@@ -41,36 +34,17 @@
 
                 <div class="row form-group">
                     <div class="col col-md-3">
-                        <label for="email-input" class=" form-control-label">CodeBar</label>
+                        <label for="text-input" class=" form-control-label">{{__('Description')}}</label>
                     </div>
                     <div class="col-12 col-md-9">
-                        <div class="mb-3 input-group">
-
-                            <input readonly type="number" id="barcode" name="barcode"
-                                   placeholder="Scanner le produit pour remplir" class="form-control">
-
-                            <div class="input-group-append">
-                            <span class="input-group-text">
-                                <i class="fa fa-barcode"></i>
-                            </span>
-                            </div>
-                        </div>
+                            <textarea
+                                placeholder="Presentez votre produit de façon claire et precise tout en donnant le max d'info à votre clientele, c'est ici que tout se joue!"
+                                onpaste="return true;" minlength="1O" maxlength="600"
+                                class="form-control"
+                                rows="5" type="text" id="text-input" name="description"></textarea>
                     </div>
                 </div>
 
-
-                <div class="row form-group">
-                    <div class="col col-md-3">
-                        <label for="email-input" class=" form-control-label">{{__('Unit')}}</label>
-                    </div>
-                    <div class="col-12 col-md-9">
-                        <select name="unit_id" id="select" class="form-control form-select">
-                            @foreach($units as $unit)
-                                <option value="{{$unit->id}}">{{$unit->name}}</option>
-                            @endforeach
-                        </select>
-                    </div>
-                </div>
 
                 <div class="row form-group">
                     <div class="col col-md-3">
@@ -79,13 +53,33 @@
                     <div class="col-12 col-md-9">
                         <div class="mb-3 input-group">
                             <div class="input-group-prepend">
-                                <span class="input-group-text">{{auth()->user()->currency()}}</span>
+                                <select name="currency_id" id="select2" class="form-control form-select">
+                                    @foreach($currencies as $currency)
+                                        <option value="{{$currency->id}}">{{$currency->code}}</option>
+                                    @endforeach
+                                </select>
                             </div>
                             <input required type="number" min="1" id="amount" name="price" placeholder=""
                                    class="form-control">
-                            <div class="input-group-append">
-                                <span class="input-group-text">.00</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row form-group">
+                    <div class="col col-md-3">
+                        <label for="email-input" class=" form-control-label">{{__('Quantity')}}</label>
+                    </div>
+                    <div class="col-12 col-md-9">
+                        <div class="mb-3 input-group">
+                            <div class="input-group-prepend">
+                                <select name="unit_id" id="select" class="form-control form-select">
+                                    @foreach($units as $unit)
+                                        <option value="{{$unit->id}}">{{$unit->name}}</option>
+                                    @endforeach
+                                </select>
                             </div>
+                            <input required type="number" min="1" id="quantity" name="quantity" placeholder=""
+                                   class="form-control">
                         </div>
                     </div>
                 </div>
@@ -96,7 +90,8 @@
                         <label for="text-input" class=" form-control-label">{{__('Image')}}</label>
                     </div>
                     <div class="col-12 col-md-9">
-                        <input type="file" id="text-input" accept="image/x-png,image/gif,image/jpeg" name="image"
+                        <input type="file" id="text-input" accept="image/x-png,image/jpeg"
+                               name="image"
                                class="form-control form-control-file">
                     </div>
 
