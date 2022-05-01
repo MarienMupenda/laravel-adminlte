@@ -99,21 +99,20 @@ class ProductController extends Controller
     {
 
         $item = new Item();
-        $item->name = $request->name;
+
         $item->category_id = $request->category;
         $item->unit_id = $request->unit_id;
         $item->price = $request->price;
         $item->description = $request->description;
-        $item->barcode = $request->barcode;
         $item->company_id = Auth::user()->company_id;
-
 
         if ($request->hasFile('image')) {
             $item->image = Helpers::uploadItemImage($request, auth()->user()->company_id);
         }
         $item->save();
 
-        $product = Product::create($request->validated());
+        $product = new Product();
+        $product->name = $request->name;
         $product->item_id = $item->id;
         $product->save();
 

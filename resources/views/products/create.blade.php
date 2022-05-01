@@ -81,7 +81,7 @@
                             <div class="input-group-prepend">
                                 <span class="input-group-text">{{auth()->user()->currency()}}</span>
                             </div>
-                            <input required type="number" id="amount" name="selling_price" placeholder=".."
+                            <input required type="number" min="1" id="amount" name="price" placeholder=""
                                    class="form-control">
                             <div class="input-group-append">
                                 <span class="input-group-text">.00</span>
