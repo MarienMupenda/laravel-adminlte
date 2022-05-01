@@ -36,11 +36,10 @@ class ProductController extends Controller
             '#',
             'Nom',
             'Categorie',
-            ['label' => 'Prix',],
-            ['label' => 'Stock',],
-            ['label' => 'Vendus',],
-            ['label' => 'Statut',],
-            ['label' => 'Actions', 'no-export' => true, 'width' => 5],
+            'Prix',
+            'Stock',
+            'Statut',
+            ['Actions', 'no-export' => true, 'width' => 5],
         ];
 
 
@@ -51,34 +50,38 @@ class ProductController extends Controller
         <i class="fa fa-lg fa-fw fa-eye"></i>
     </button>';
 
-        $items = Item::orderBy('id', 'desc')->where('company_id', '=', Auth::user()->company_id)->get();
+        $products = Product::orderBy('id', 'desc')->whereHas('item', function ($q) {
+            $q->where('company_id', Auth::user()->company->id);
+        })->get();
 
-        foreach ($items as $item) {
-            $img = $item->image_small();
+        // $products = ProductResource::collection($products);
 
-            $btnEdit = '<a href="' . route('products.edit', $item) . '" class="mx-1 shadow btn btn-xs btn-default text-primary" title="Edit">
+        foreach ($products as $product) {
+            $img = $product->item->image_small();
+
+            $btnEdit = '<a href="' . route('products.edit', $product) . '" class="mx-1 shadow btn btn-xs btn-default text-primary" title="Edit">
         <i class="fa fa-lg fa-fw fa-pen"></i>
     </a>';
 
             $data[] = [
-                "<img class='uz-img'  src='$img' alt='$item->name'>",
-                $item->name,
-                $item->category->name,
-                $item->price(),
-                $item->qty() . ' ' . $item->unit->name,
-                $item->soldQty() . ' ' . $item->unit->name,
-                trans(ucfirst($item->state())),
+                "<img class='uz-img'  src='$img' alt='$product->name'>",
+                $product->name,
+                $product->item->category,
+                $product->item->price . ' ' . $product->item->currency->code,
+                ($product->quantity ?? 0) . ' ' . $product->item->unit->name,
+                trans(ucfirst($product->item->status)),
 
                 '<nobr>' . $btnEdit . '</nobr>',
 
 
             ];
+
         }
 
         $config = [
             'data' => $data ?? null,
             'order' => [[1, 'asc']],
-            'columns' => [['orderable' => false], null, null, null, null, null, null, ['orderable' => false]],
+            'columns' => [['orderable' => false], null, null, null, null, null, ['orderable' => false]],
         ];
 
         return view('products.index', compact('config', 'heads'))->with('title', 'Produits');
@@ -147,20 +150,17 @@ class ProductController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param Item $item
+     * @param Item $product
      * @return Application|Factory|View
      */
-    public function edit(Item $item)
+    public function edit(Product $product)
     {
         $data = [
-            'item' => $item,
-            'articles' => $item->articles,
-            'categories' => Category::orderBy('name', 'asc')->get(),
+            'product' => $product,
+            'categories' => $this->category->children()->get(),
             'units' => Unit::all(),
-            'colors' => Color::orderBy('name', 'asc')->get(),
-            'sizes' => Size::orderBy('name', 'asc')->get(),
         ];
-        return \view('dashboard.items.edit', $data)->with('title', $item->name);
+        return \view('dashboard.items.edit', $data)->with('title', $product->name);
     }
 
     /**
