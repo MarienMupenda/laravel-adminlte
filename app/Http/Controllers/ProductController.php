@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Helpers\Helpers;
 use App\Http\Requests\StoreProductRequest;
+use App\Http\Requests\UpdateProductRequest;
 use App\Http\Resources\ProductResource;
 use App\Models\Category;
 use App\Models\Currency;
@@ -171,16 +172,8 @@ class ProductController extends Controller
      * @param Item $item
      * @return Application|Redirector|RedirectResponse
      */
-    public function update(Request $request, Item $item)
+    public function update(UpdateProductRequest $request, Item $item)
     {
-        $request->validate([
-            'image' => 'image|nullable|max:1999',
-            'pa' => 'numeric|nullable|min:1',
-            'description' => 'string|nullable',
-            'pv' => 'numeric|nullable|min:1',
-            'image_url' => 'string|nullable|min:1',
-        ]);
-
 
         if ($item->name != $request->name) {
             $request->validate([

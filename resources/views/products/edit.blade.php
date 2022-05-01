@@ -36,10 +36,7 @@
                             </div>
                             <div class="col-md-9">
                                 <div class="p-3 py-5">
-                                    <div class="d-flex justify-content-between align-items-center mb-3">
-                                        <h4 class="text-right">Produit</h4>
-                                    </div>
-                                    <form action="{{route("items.update",$product)}}" enctype="multipart/form-data"
+                                    <form action="{{route("products.update",$product)}}" enctype="multipart/form-data"
                                           method="POST" class="form-horizontal">
                                         @csrf @method('PUT')
 
@@ -53,26 +50,6 @@
                                                 <input type="text" id="text-input" name="name"
                                                        value="{{$product->name}}" placeholder="Text"
                                                        class="form-control">
-                                            </div>
-                                        </div>
-                                        <div class="row form-group">
-                                            <div hidden class="col col-lg-3">
-                                                <label for="email-input" class=" form-control-label">CodeBar</label>
-                                            </div>
-                                            <div class="col-12 col-md-12">
-                                                <div class="input-group mb-3">
-
-                                                    <input readonly type="number" id="barcode" name="barcode"
-                                                           value="{{$product->barcode}}"
-                                                           placeholder="Scanner le produit pour remplir"
-                                                           class="form-control">
-
-                                                    <div class="input-group-append">
-                                                    <span class="input-group-text">
-                                                        <i class="fa fa-barcode"></i>
-                                                    </span>
-                                                    </div>
-                                                </div>
                                             </div>
                                         </div>
                                         <div class="row form-group">
@@ -165,13 +142,11 @@
                                         </div>
 
 
-                                        @if(auth()->user()->isAdmin())
-                                            <div class="mt-5 text-center">
-                                                <button type="submit" class="btn btn-primary profile-button">
-                                                    <i class="fa fa-save"></i> {{__('Save')}}
-                                                </button>
-                                            </div>
-                                        @endif
+                                        <div class="mt-5 text-center">
+                                            <button type="submit" class="btn btn-primary profile-button">
+                                                <i class="fa fa-save"></i> {{__('Save')}}
+                                            </button>
+                                        </div>
 
                                     </form>
                                 </div>
