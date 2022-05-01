@@ -96,7 +96,7 @@
                                             </div>
                                             <div
                                                 class="col-12 col-md-3 d-flex align-items-center text-muted text-medium">
-                                                {{ $item->category->name }}
+                                                {{ $item->category->name??null }}
                                             </div>
                                             <div
                                                 class="col-12 col-md-3 d-flex align-items-center justify-content-md-end text-muted text-medium">
