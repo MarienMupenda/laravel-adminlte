@@ -7,6 +7,7 @@ use App\Http\Requests\StoreProductRequest;
 use App\Models\Category;
 use App\Models\Currency;
 use App\Models\Item;
+use App\Models\MainCategory;
 use App\Models\Product;
 use App\Models\Unit;
 use Illuminate\Contracts\Foundation\Application;
@@ -108,7 +109,7 @@ class ProductController extends Controller
         $item->company_id = Auth::user()->company->id;
         $item->save();
 
-        $item->slug = Helpers::slugify($request->name, Category::, $item->id);
+        $item->slug = Helpers::slugify($request->name, MainCategory::find(), $item->id);
         if ($request->hasFile('image')) {
             $item->image = Helpers::uploadItemImage($request, Auth::user()->company->id);
         }
