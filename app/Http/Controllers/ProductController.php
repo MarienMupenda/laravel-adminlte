@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Helpers\Helpers;
 use App\Http\Requests\StoreProductRequest;
+use App\Http\Resources\ProductResource;
 use App\Models\Category;
 use App\Models\Currency;
 use App\Models\Item;
@@ -156,11 +157,11 @@ class ProductController extends Controller
     public function edit(Product $product)
     {
         $data = [
-            'product' => $product,
+            'product' => ProductResource::make($product),
             'categories' => $this->category->children()->get(),
             'units' => Unit::all(),
         ];
-        return \view('dashboard.items.edit', $data)->with('title', $product->name);
+        return \view('products.edit', $data)->with('title', $product->name);
     }
 
     /**

@@ -16,4 +16,8 @@ class Product extends Model
     }
 
 
+    public function image_small()
+    {
+        return $this->item->image_small();
+    }
 }
