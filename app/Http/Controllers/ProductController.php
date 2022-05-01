@@ -209,12 +209,15 @@ class ProductController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param Item $item
+     * @param Item $product
      * @return Application|Redirector|RedirectResponse
      */
-    public function destroy(Item $item)
+    public function destroy(Product $product)
     {
-        $item->delete();
-        return redirect(route('items.index'))->with('success', __('The action ran successfully!'));
+        if ($product->item->delete()) {
+            $product->delete();
+            return redirect()->route('products.index')->with('success', 'Produit supprimé avec succès');
+        }
+        return redirect()->route('products.index')->with('error', 'Une erreur est survenue lors de la suppression du produit');
     }
 }
