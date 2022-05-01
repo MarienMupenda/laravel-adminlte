@@ -169,53 +169,41 @@ class ProductController extends Controller
      * Update the specified resource in storage.
      *
      * @param Request $request
-     * @param Item $item
+     * @param Item $product
      * @return Application|Redirector|RedirectResponse
      */
-    public function update(UpdateProductRequest $request, Item $item)
+    public function update(UpdateProductRequest $request, Product $product)
     {
 
-        if ($item->name != $request->name) {
-            $request->validate([
-                'name' => 'string|required|unique:items,name,NULL,id,company_id,' . Auth::user()->company_id,
-            ]);
-        }
-
-        if ($item->barcode != $request->barcode) {
-            $request->validate([
-                'barcode' => 'numeric|nullable|unique:items,barcode,NULL,id,company_id,' . Auth::user()->company_id,
-            ]);
+        if ($product->name != $request->name) {
+            $product->item->slug = Helpers::slugify($request->name, $this->category->name, $product->item->id);
+            $product->name = $request->name;
         }
 
         if ($request->hasFile('image')) {
-            $item->delete_image();
-            $item->image = Helpers::uploadItemImage($request, auth()->user()->company_id);
+            $product->delete_image();
+            $product->item->image = Helpers::uploadItemImage($request, auth()->user()->company->id);
         }
 
-        if ($request->has('image_url') and !empty($request->image_url)) {
-            $item->delete_image();
-            $item->image = Helpers::uploadItemImageUrl($request, Auth::user()->company_id);
+        if ($request->image_url != null) {
+            $product->delete_image();
+            $product->item->image = Helpers::uploadItemImageUrl($request, Auth::user()->company->id);
         }
 
 
-        $item->name = $request->input('name');
-        $item->category_id = $request->input('category');
-        $item->unit_id = $request->input('unit');
-        $item->selling_price = $request->input('pv');
-        $item->barcode = $request->input('barcode');
-        $item->description = $request->input('description');
-        $item->company_id = Auth::user()->company_id;
-
-        // if ($item->description) {
-        //    $item->state = Item::STATE_PUBLISHED;
-        //l}
-
+        $item = $product->item;
+        $item->category_id = $request->category_id ?? $item->category_id;
+        $item->unit_id = $request->unit_id ?? $item->unit_id;
+        $item->price = $request->price ?? $item->price;
+        $item->currency_id = $request->currency_id ?? $item->currency_id;
         $item->update();
 
-        // return ItemResource::make($item);
+        $product->description = $request->description ?? $product->description;
+        $product->update();
 
 
-        return redirect(url()->previous())->with('success', __('The action ran successfully!'));
+        return redirect(url()->previous())->with('success', 'Produit modifié avec succès');
+
     }
 
     /**
@@ -227,6 +215,6 @@ class ProductController extends Controller
     public function destroy(Item $item)
     {
         $item->delete();
-        return redirect(route('dashboard.items.index'))->with('success', __('The action ran successfully!'));
+        return redirect(route('items.index'))->with('success', __('The action ran successfully!'));
     }
 }

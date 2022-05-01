@@ -19,7 +19,7 @@
                             <div class="col-md-3 border-right">
                                 <div class="d-flex flex-column align-items-center text-center p-3 py-5">
                                     <img id="img-view" width="150px" height="auto" src="{{$product->image_small()}}"
-                                         class="img-fluid mt-5">
+                                         class="img-fluid m-3">
                                     <form method="post" class="pull-right"
                                           action="{{route('products.destroy',$product)}}">
                                         @csrf @method('DELETE')
@@ -140,7 +140,6 @@
                                                 </div>
                                             </div>
                                         </div>
-
 
                                         <div class="mt-5 text-center">
                                             <button type="submit" class="btn btn-primary profile-button">

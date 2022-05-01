@@ -20,4 +20,9 @@ class Product extends Model
     {
         return $this->item->image_small();
     }
+
+    public function delete_image()
+    {
+        return $this->item->delete_image();
+    }
 }
