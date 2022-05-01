@@ -129,9 +129,7 @@ class ProductController extends Controller
         $product->item_id = $item->id;
         $product->save();
 
-        return $product;
-
-        // return redirect(url()->previous())->with('success', __('The action ran successfully!'));
+        return redirect()->route('products.index')->with('success', 'Produit ajouté avec succès');
     }
 
     /**
