@@ -101,16 +101,16 @@ class ProductController extends Controller
     {
 
         $item = new Item();
-        $item->category_id = $request->category;
+        $item->category_id = $request->category_id;
         $item->unit_id = $request->unit_id;
         $item->price = $request->price;
         $item->currency_id = $request->currency_id;
-        $item->company_id = Auth::user()->company_id;
+        $item->company_id = Auth::user()->company->id;
         $item->save();
 
-        $item->slug = Helpers::slugify($request->name, 'p', $item->id);
+        $item->slug = Helpers::slugify($request->name, Category::, $item->id);
         if ($request->hasFile('image')) {
-            $item->image = Helpers::uploadItemImage($request, Auth::user()->company_id);
+            $item->image = Helpers::uploadItemImage($request, Auth::user()->company->id);
         }
         $item->save();
 
@@ -121,7 +121,6 @@ class ProductController extends Controller
         $product->item_id = $item->id;
         $product->save();
 
-        return $product;
         // return redirect(url()->previous())->with('success', __('The action ran successfully!'));
     }
 
