@@ -4,9 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Helpers\Helpers;
 use App\Http\Requests\StoreProductRequest;
-use App\Http\Requests\UpdateProductRequest;
 use App\Models\Category;
 use App\Models\Item;
+use App\Models\Product;
 use App\Models\Unit;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
@@ -95,39 +95,30 @@ class ProductController extends Controller
      * @param Request $request
      * @return RedirectResponse
      */
-    public function store(Request $request)
+    public function store(StoreProductRequest $request)
     {
-        $request->validate([
-            'name' => 'string|required|unique:items,name,NULL,id,company_id,' . Auth::user()->company_id,
-            'image' => 'image|nullable|max:1999',
-            'category' => 'numeric|required',
-            'description' => 'string|nullable',
-            'barcode' => 'numeric|nullable|unique:items,barcode,NULL,id,company_id,' . Auth::user()->company_id,
-            //'pa' => 'numeric|nullable|min:1',
-            'pv' => 'numeric|required|min:1',
-
-        ]);
-
 
         $item = new Item();
-        $item->name = $request->input('name');
-        $item->category_id = $request->input('category');
-        $item->unit_id = $request->input('unit');
-        $item->selling_price = $request->input('pv');
-        $item->description = $request->input('description');
-        $item->barcode = $request->input('barcode');
-        //  $item->initial_price = $request->input('pa');
+        $item->name = $request->name;
+        $item->category_id = $request->category;
+        $item->unit_id = $request->unit_id;
+        $item->price = $request->price;
+        $item->description = $request->description;
+        $item->barcode = $request->barcode;
         $item->company_id = Auth::user()->company_id;
 
 
         if ($request->hasFile('image')) {
             $item->image = Helpers::uploadItemImage($request, auth()->user()->company_id);
         }
-
         $item->save();
 
+        $product = Product::create($request->validated());
+        $product->item_id = $item->id;
+        $product->save();
 
-        return redirect(url()->previous())->with('success', __('The action ran successfully!'));
+        return $product;
+        // return redirect(url()->previous())->with('success', __('The action ran successfully!'));
     }
 
     /**

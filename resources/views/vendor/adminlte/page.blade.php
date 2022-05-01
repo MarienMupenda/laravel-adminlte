@@ -6,7 +6,6 @@
     @include('includes.css_top')
     @stack('css')
     @yield('css')
-
 @stop
 
 @section('classes_body', $layoutHelper->makeBodyClasses())
