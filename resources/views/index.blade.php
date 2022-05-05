@@ -14,7 +14,7 @@
                                     {{\App\Helpers\Helpers::number_format_short($earning)}}
                                     <sup style="font-size: 20px"> {{$currency}}</sup>
                                 </h3>
-                                <p>Recettes X</p>
+                                <p>Recettes</p>
                             </div>
                             <div class="icon">
                                 <i class="ion ion-stats-bars"></i>

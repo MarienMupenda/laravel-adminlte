@@ -50,6 +50,7 @@ Route::middleware(['auth:web'])->group(function () {
 
 
 Route::post('git-deploy', function () {
-    return Artisan::call('git:deploy');
+    Artisan::call('git:deploy');
+    return Artisan::output();
 });
 
