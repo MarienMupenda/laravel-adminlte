@@ -43,7 +43,5 @@ class AutoDeploy extends Command
         exec('git pull origin master', $output);
         Log::info($output);
 
-        return $output;
-
     }
 }
