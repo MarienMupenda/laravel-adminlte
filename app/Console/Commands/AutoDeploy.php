@@ -38,9 +38,9 @@ class AutoDeploy extends Command
     public function handle()
     {
 
-       // exec('git reset --hard');
+        exec('git reset --hard');
         exec('git pull origin master', $output);
-        \Log::info($output);
+        Log::info($output);
 
     }
 }
