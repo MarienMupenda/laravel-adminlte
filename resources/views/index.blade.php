@@ -1,7 +1,7 @@
 @extends('adminlte::page')
 
 @section('content')
-    <div hidden class="row">
+    <div  class="row">
         <div class="col-12">
             <div class="mb-5">
                 <div class="row g-2">
@@ -14,7 +14,7 @@
                                     {{\App\Helpers\Helpers::number_format_short($earning)}}
                                     <sup style="font-size: 20px"> {{$currency}}</sup>
                                 </h3>
-                                <p>Recettes</p>
+                                <p>Recettes X</p>
                             </div>
                             <div class="icon">
                                 <i class="ion ion-stats-bars"></i>
