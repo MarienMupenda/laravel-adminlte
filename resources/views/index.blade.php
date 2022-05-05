@@ -1,7 +1,7 @@
 @extends('adminlte::page')
 
 @section('content')
-    <div class="row">
+    <div hidden class="row">
         <div class="col-12">
             <div class="mb-5">
                 <div class="row g-2">
