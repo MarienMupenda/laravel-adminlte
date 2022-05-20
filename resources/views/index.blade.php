@@ -1,74 +1,34 @@
 @extends('adminlte::page')
 
 @section('content')
-    <div  class="row">
+    <div class="row">
         <div class="col-12">
             <div class="mb-5">
                 <div class="row g-2">
 
+
                     <div class="col-lg-3 col-6">
                         {{-- Themes --}}
-                        <div class="small-box bg-success">
-                            <div class="inner">
-                                <h3>
-                                    {{\App\Helpers\Helpers::number_format_short($earning)}}
-                                    <sup style="font-size: 20px"> {{$currency}}</sup>
-                                </h3>
-                                <p>Recettes X</p>
-                            </div>
-                            <div class="icon">
-                                <i class="ion ion-stats-bars"></i>
-                            </div>
-                            <a href="/rapports" class="small-box-footer">
-                                {{ __('More info') }} <i class="fas fa-arrow-circle-right"></i>
-                            </a>
-                        </div>
+                        <x-adminlte-small-box title="424" text="Views" icon="fas fa-eye"
+                                              theme="danger" url="#" url-text="View details"/>
                     </div>
 
                     <div class="col-lg-3 col-6">
-
-                        <div class="small-box bg-info">
-                            <div class="inner">
-                                <h3>{{$orders}}</h3>
-                                <p>Commandes</p>
-                            </div>
-                            <div class="icon">
-                                <i class="fas fa-shopping-cart"></i>
-                            </div>
-                            <a href="/orders" class="small-box-footer">
-                                {{ __('More info') }} <i class="fas fa-arrow-circle-right"></i>
-                            </a>
-                        </div>
+                        {{-- Themes --}}
+                        <x-adminlte-small-box title="424" text="Views" icon="fas fa-eye"
+                                              theme="success" url="#" url-text="View details"/>
                     </div>
-                    <div class="col-lg-3 col-6">
 
-                        <div class="small-box bg-danger">
-                            <div class="inner">
-                                <h3>{{$items}}</h3>
-                                <p>Produits</p>
-                            </div>
-                            <div class="icon">
-                                <i class="fas fa-chart-pie"></i>
-                            </div>
-                            <a href="/items" class="small-box-footer">
-                                {{ __('More info') }} <i class="fas fa-arrow-circle-right"></i>
-                            </a>
-                        </div>
+                    <div class="col-lg-3 col-6">
+                        {{-- Themes --}}
+                        <x-adminlte-small-box title="424" text="Views" icon="fas fa-eye"
+                                              theme="primary" url="#" url-text="View details"/>
                     </div>
-                    <div class="col-lg-3 col-6">
 
-                        <div class="small-box bg-warning">
-                            <div class="inner">
-                                <h3>{{$users}}</h3>
-                                <p>{{ __('Users') }}</p>
-                            </div>
-                            <div class="icon">
-                                <i class="fas fa-user-plus"></i>
-                            </div>
-                            <a href="/users" class="small-box-footer">
-                                {{ __('More info') }} <i class="fas fa-arrow-circle-right"></i>
-                            </a>
-                        </div>
+                    <div class="col-lg-3 col-6">
+                        {{-- Themes --}}
+                        <x-adminlte-small-box title="424" text="Views" icon="fas fa-users"
+                                              theme="warning" url="#" url-text="View details"/>
                     </div>
 
                 </div>
@@ -188,14 +148,3 @@
         </div>
     </div>
 @endsection
-
-@section('css')
-    <link rel="stylesheet" href="/css/admin_custom.css">
-@stop
-
-@section('js')
-    <script>
-        console.log('Hi!');
-
-    </script>
-@stop
