@@ -51,24 +51,10 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    public function companies()
-    {
-        return $this->hasMany(Company::class);
-    }
 
-    public function hasActiveCompany()
+    public function getCreatedAtAttribute($value)
     {
-        return $this->company()->where('status', 'active')->exists();
-    }
-
-    public function company()
-    {
-        return $this->hasOne(Company::class);
-    }
-
-    public function createdAt()
-    {
-        return Date::parse($this->created_at)->format('d-m-Y H:i');
+        return Date::parse($value)->format('d/m/Y');
     }
 
     public function isAdmin()
@@ -79,27 +65,6 @@ class User extends Authenticatable
     public function isSuperAdmin()
     {
         return $this->role_id == self::SUPER_ADMIN;
-    }
-
-
-    public function currency()
-    {
-        return $this->company->currency->code;
-    }
-
-    public function profile()
-    {
-        return $this->hasOne(Profile::class);
-    }
-
-    public function roles()
-    {
-        return $this->hasManyThrough(Role::class, UserRole::class, 'user_id', 'id', 'id', 'role_id');
-    }
-
-    public function customer()
-    {
-        return $this->hasOne(Customer::class);
     }
 
 
@@ -124,7 +89,7 @@ class User extends Authenticatable
 
     public function adminlte_desc()
     {
-        return $this->roles->first()->name;
+        return $this->roles->first()->name??'N/A';
     }
 
     public function adminlte_profile_url()

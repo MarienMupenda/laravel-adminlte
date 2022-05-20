@@ -28,16 +28,23 @@ class HomeController extends Controller
     public function index()
     {
 
+
+
+
+
         $data = [
+            //'items' => Item::where('company_id', $company->id)->count(),
             'items' => null,
             'orders' => null,
             'earning' => null,
-            'currency' => null,
-            'users' => null,
+            'currency' =>null,
+            //'users' => User::where('company_id', $company->id)->count(),
+            'users' => 1,
             'returns' => 0,
             'comments' => 0,
-            'recent_orders' => null,
-            'top_sold_items' => null,
+            //'sessions' => 2,
+            'recent_orders' => [],
+            'top_sold_items' =>[],
         ];
 
 

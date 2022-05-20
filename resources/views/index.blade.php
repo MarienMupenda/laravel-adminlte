@@ -19,7 +19,7 @@
                             <div class="icon">
                                 <i class="ion ion-stats-bars"></i>
                             </div>
-                            <a href="{{route('rapports')}}" class="small-box-footer">
+                            <a href="/rapports" class="small-box-footer">
                                 {{ __('More info') }} <i class="fas fa-arrow-circle-right"></i>
                             </a>
                         </div>
@@ -35,7 +35,7 @@
                             <div class="icon">
                                 <i class="fas fa-shopping-cart"></i>
                             </div>
-                            <a href="{{route('rapports')}}" class="small-box-footer">
+                            <a href="/orders" class="small-box-footer">
                                 {{ __('More info') }} <i class="fas fa-arrow-circle-right"></i>
                             </a>
                         </div>
@@ -50,7 +50,7 @@
                             <div class="icon">
                                 <i class="fas fa-chart-pie"></i>
                             </div>
-                            <a href="{{route('items.index')}}" class="small-box-footer">
+                            <a href="/items" class="small-box-footer">
                                 {{ __('More info') }} <i class="fas fa-arrow-circle-right"></i>
                             </a>
                         </div>
@@ -65,7 +65,7 @@
                             <div class="icon">
                                 <i class="fas fa-user-plus"></i>
                             </div>
-                            <a href="{{route('users.index')}}" class="small-box-footer">
+                            <a href="/users" class="small-box-footer">
                                 {{ __('More info') }} <i class="fas fa-arrow-circle-right"></i>
                             </a>
                         </div>
