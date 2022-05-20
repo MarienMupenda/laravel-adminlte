@@ -28,57 +28,19 @@ class HomeController extends Controller
     public function index()
     {
 
-        $company = auth()->user()->company;
-
-        // $top_selling_items = Item::with('sellingDetails')
-        $top_sold_items = Item::leftJoin('order_items', 'items.id', '=', 'item_id')
-            ->selectRaw('items.*, COALESCE(sum(order_items.quantity),0) total')
-            ->groupBy('items.id')
-            ->orderBy('total', 'desc')
-            ->where('company_id', $company->id)
-            ->take(5)
-            ->get();
-
-
-        $home = [
-            //'items' => Item::where('company_id', $company->id)->count(),
-            'items' => Item::where('company_id', $company->id)->count(),
-            'orders' => Order::orderBy('id', 'desc')->where('company_id', $company->id)->count(),
-            'earning' => $this->getEarnins(),
-            'currency' => $company->currency->symbol,
-            //'users' => User::where('company_id', $company->id)->count(),
-            'users' => 1,
+        $data = [
+            'items' => null,
+            'orders' => null,
+            'earning' => null,
+            'currency' => null,
+            'users' => null,
             'returns' => 0,
             'comments' => 0,
-            //'sessions' => 2,
-            'recent_orders' => Order::orderBy('id', 'desc')->where('company_id', $company->id)->take(10)->get(),
-            'top_sold_items' => $top_sold_items,
+            'recent_orders' => null,
+            'top_sold_items' => null,
         ];
 
 
-        return view('index', $home)->with('title', 'Dashboard');
-    }
-
-    private function getEarnins()
-    {
-
-        $from = Carbon::now()->startOfMonth();
-        $to = Carbon::tomorrow();
-
-        $sellings = OrderItem::with(['item'])
-            ->whereHas('item', function ($q) {
-                $q->where('company_id', Auth::user()->company_id);
-            })
-            ->whereBetween('created_at', [$from, $to])
-            ->get();
-
-
-        $total = 0;
-
-        foreach ($sellings as $selling) {
-            $total += $selling->selling_price;
-        }
-
-        return $total;
+        return view('index', $data)->with('title', 'Dashboard');
     }
 }

@@ -34,18 +34,7 @@ Route::get('/home', [HomeController::class, 'index'])->name('home');
 
 
 Route::middleware(['auth:web'])->group(function () {
-    Route::resource('products', ProductController ::class);
-    Route::resource('books', BookController ::class);
-    Route::resource('items', ProductController ::class);
-    Route::resource('categories', CategoryController::class);
-    Route::resource('orders', OrderController::class);
-    Route::resource('order-items', OrderItemController::class);
     Route::resource('users', UserController::class);
-    Route::resource('companies', CompanyController::class);
-    Route::resource('contacts', ContactController::class);
-
-    Route::get('rapports', [RapportController::class, 'index'])->name('rapports');
-    Route::get('rapports/{from}/{to}', [RapportController::class, 'index'])->name('SearchRapports');
 });
 
 
